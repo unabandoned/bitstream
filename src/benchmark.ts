@@ -1,5 +1,4 @@
 /* istanbul ignore file */
-import "source-map-support/register";
 
 import { FPSCounter, Generator, runTests } from './benchmark-utils';
 import { BitstreamReader } from './bitstream';

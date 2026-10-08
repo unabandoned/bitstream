@@ -1,14 +1,14 @@
-import { expect } from "chai";
-import { describe, it } from "razmin";
+import { describe, it } from "node:test";
+import * as assert from "node:assert/strict";
 import { BufferedWritable } from "./buffered-writable";
 
 describe('BufferedWritable', () => {
     it('appends written data onto its buffer', () => {
         let writable = new BufferedWritable();
-        expect(writable.buffer.length).to.equal(0);
+        assert.strictEqual(writable.buffer.length, 0);
         writable.write(Buffer.alloc(3));
-        expect(writable.buffer.length).to.equal(3);
+        assert.strictEqual(writable.buffer.length, 3);
         writable.write(Buffer.alloc(20));
-        expect(writable.buffer.length).to.equal(23);
+        assert.strictEqual(writable.buffer.length, 23);
     });
 });

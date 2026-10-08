@@ -356,7 +356,7 @@ export class BitstreamReader {
      * @param offset The offset into the buffer to write to. Defaults to zero
      * @param length The length of bytes to read. Defaults to the length of the array (sans the offset)
      */
-    async readBytesBlocking(buffer : Uint8Array, offset : number = 0, length? : number) {
+    async readBytesBlocking(buffer : Uint8Array, offset : number = 0, length? : number): Promise<Uint8Array> {
         length ??= buffer.length - offset;
         let gen = this.readBytes(buffer, offset, length);
 

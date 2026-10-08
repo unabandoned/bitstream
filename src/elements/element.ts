@@ -245,7 +245,7 @@ export class BitstreamElement {
      *                  contain zeros up to the next byte. When false (default), serialize() will throw
      *                  if the size is not a multiple of 8.
      */
-    serialize(fromRef? : FieldRef<this>, toRef? : FieldRef<this>, autoPad = false) {
+    serialize(fromRef? : FieldRef<this>, toRef? : FieldRef<this>, autoPad = false): Uint8Array {
         if (this.syntax.length === 0)
             return;
         
