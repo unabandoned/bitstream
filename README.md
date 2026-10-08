@@ -1,12 +1,25 @@
-# @/bitstream 
+# @unabandoned/bitstream
 
-[![npm](https://img.shields.io/npm/v/@astronautlabs/bitstream)](https://npmjs.com/package/@astronautlabs/bitstream)
-[![CircleCI](https://circleci.com/gh/astronautlabs/bitstream.svg?style=svg)](https://circleci.com/gh/astronautlabs/bitstream)
+[![npm](https://img.shields.io/npm/v/@unabandoned/bitstream)](https://npmjs.com/package/@unabandoned/bitstream)
+[![CI](https://github.com/unabandoned/bitstream/actions/workflows/ci.yml/badge.svg)](https://github.com/unabandoned/bitstream/actions/workflows/ci.yml)
+
+> **This is a maintained fork of [astronautlabs/bitstream][upstream], published as
+> [`@unabandoned/bitstream`][pkg].** Upstream's last release was 4.2.2 in January 2024.
+> The API and the published layout (`dist/` CommonJS, `dist.esm/` ES modules)
+> are unchanged; the fork exists to keep it and its dependency tree current.
+> The `reflect-metadata` peer accepts both `^0.1.13` and `^0.2.0`.
+> See [.unabandoned.yml](.unabandoned.yml).
+>
+> To take it without touching imports, alias it:
+> `"@astronautlabs/bitstream": "npm:@unabandoned/bitstream@<version>"`.
+
+[upstream]: https://github.com/astronautlabs/bitstream
+[pkg]: https://www.npmjs.com/package/@unabandoned/bitstream
 
 - **Isomorphic**: Works in Node.js and in the browser
 - **Zero-dependency**: No runtime dependencies
 - **Battle-hardened**: Used to implement media standards at Astronaut Labs
-- **Comprehensive testing**: [90.38% coverage](https://218-305936359-gh.circle-artifacts.com/0/coverage/lcov-report/index.html) and growing!
+- **Comprehensive testing**: 384 tests on `node:test`
 - **Performant**: Elements use generators (not promises) internally to maximize performance
 - **Flexible**: Supports both imperative and declarative styles
 - **Modern**: Ships as ES modules (with CommonJS fallback)
@@ -28,7 +41,7 @@ complete libraries possible, even if we don't need every detail for our immediat
 
 # Installation
 
-`npm install @astronautlabs/bitstream`
+`npm install @unabandoned/bitstream reflect-metadata`
 
 # Libraries using Bitstream
 
@@ -44,7 +57,7 @@ library to be listed here, please send a pull request!
 # BitstreamReader: Reading from bitstreams imperatively
 
 ```typescript
-import { BitstreamReader } from '@astronautlabs/bitstream';
+import { BitstreamReader } from '@unabandoned/bitstream';
 
 let reader = new BitstreamReader();
 
@@ -126,7 +139,7 @@ await reader.readString(10, { encoding: 'utf16le' })
 # BitstreamWriter: Writing to bitstreams imperatively
 
 ```typescript
-import { BitstreamWriter } from '@astronautlabs/bitstream';
+import { BitstreamWriter } from '@unabandoned/bitstream';
 
 let writer = new BitstreamWriter(writableStream, bufferLength);
 
@@ -182,7 +195,7 @@ Efficient structural (de)serialization can be achieved by building subclasses of
 You can declaratively specify elements of bitstreams, then read and write them to bitstream readers/writers as needed. To do this, extend the `BitstreamElement` class:
 
 ```typescript
-import { BitstreamElement, Field } from '@astronautlabs/bitstream';
+import { BitstreamElement, Field } from '@unabandoned/bitstream';
 
 class MyElement extends BitstreamElement {
     @Field(2) field1 : number;

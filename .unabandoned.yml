@@ -1,0 +1,30 @@
+schema: 1
+
+package: "@unabandoned/bitstream"
+
+upstream:
+  repo: astronautlabs/bitstream
+  reason: "no release or commit since 2024-01 (4.2.2)"
+
+summary: >-
+  Reads and writes bit-level binary data: a bitstream reader/writer plus
+  decorator-driven element classes that (de)serialize structured binary
+  formats field by field.
+
+why-forked: >-
+  @unabandoned/amf depends on it at runtime, and through amf it ships in
+  CyberChef's AMF Encode/Decode operations. Upstream went quiet while
+  declaring a reflect-metadata ^0.1.13 peer, which forced a second, never
+  loaded reflect-metadata copy next to CyberChef's 0.2.2, and a dev tree of
+  TypeScript 5, chai 4, razmin, nyc and ts-node. Adopted so the peer range
+  tracks reflect-metadata and Renovate keeps that tree current.
+
+status: active
+
+used-by:
+  - consumer: unabandoned/amf
+    purpose: "Field-level (de)serialization of AMF0/AMF3 values."
+  - consumer: TheTechNetwork/CyberChef
+    purpose: "Via @unabandoned/amf, in the AMF Encode/Decode operations."
+
+tags: [bitstream, binary, serialization, parsing, decorators, typescript]

@@ -1,0 +1,15 @@
+name: CI
+on:
+  push:
+    branches: [main]
+  pull_request:
+jobs:
+  ci:
+    permissions:
+      contents: read
+    uses: unabandoned/.github/.github/workflows/reusable-ci.yml@bd9eb6bfc5a567b272e0c6f05703a726a2655531 # v1.1.0
+    with:
+      # engines: node >=22.12, so the 20 the shared default carries is out of range.
+      node-versions: '[22, 24]'
+      # Ships tsc output (dist/, dist.esm/), so CI builds before testing.
+      has-build: true

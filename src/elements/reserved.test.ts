@@ -1,10 +1,10 @@
-import { expect } from "chai";
-import { describe } from "razmin";
+import { describe, it } from "node:test";
+import * as assert from "node:assert/strict";
 import { BitstreamElement } from "./element";
 import { Field } from "./field";
 import { Reserved } from "./reserved";
 
-describe('@Reserved()', it => {
+describe('@Reserved()', () => {
     it('always writes high bits', () => {
         class CustomElement extends BitstreamElement {
             @Field(8) a : number;
@@ -14,7 +14,7 @@ describe('@Reserved()', it => {
 
         let buf = new CustomElement().with({ a: 123, reserved: 111, b: 122 }).serialize();
 
-        expect(Array.from(buf)).to.eql([ 123, 255, 122]);
+        assert.deepStrictEqual(Array.from(buf), [ 123, 255, 122]);
     });
     it('supports determinants', () => {
         class CustomElement extends BitstreamElement {
@@ -25,7 +25,7 @@ describe('@Reserved()', it => {
 
         let buf = new CustomElement().with({ a: 123, reserved: 111, b: 122 }).serialize();
 
-        expect(Array.from(buf)).to.eql([ 123, 255, 122]);
+        assert.deepStrictEqual(Array.from(buf), [ 123, 255, 122]);
     });
     it('is never read', () => {
         class CustomElement extends BitstreamElement {
@@ -36,8 +36,8 @@ describe('@Reserved()', it => {
 
         let element = CustomElement.deserialize(Buffer.from([ 123, 111, 122 ]));
 
-        expect(element.a).to.equal(123);
-        expect(element.reserved).to.be.undefined;
-        expect(element.b).to.equal(122);
+        assert.strictEqual(element.a, 123);
+        assert.strictEqual(element.reserved, undefined);
+        assert.strictEqual(element.b, 122);
     });
 });

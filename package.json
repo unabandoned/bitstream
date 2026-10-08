@@ -1,11 +1,19 @@
 {
-  "name": "@astronautlabs/bitstream",
+  "name": "@unabandoned/bitstream",
   "version": "4.2.2",
   "description": "Utilities for packing/unpacking fields of a bitstream",
   "main": "dist/index.js",
   "module": "dist.esm/index.js",
   "types": "dist/index.d.ts",
-  "private": false,
+  "files": [
+    "dist",
+    "dist.esm",
+    "src",
+    "!src/**/*.test.ts",
+    "!src/test-setup.ts",
+    "!src/benchmark.ts",
+    "!src/benchmark-utils.ts"
+  ],
   "keywords": [
     "bitstream",
     "serialization",
@@ -16,34 +24,37 @@
     "syntax"
   ],
   "scripts": {
-    "clean": "rimraf dist dist.esm",
-    "build": "npm run clean && tsc -b && tsc -b tsconfig.esm.json",
-    "test": "npm run build && nyc node dist/test",
-    "test:nocov": "npm run build && node dist/test",
-    "benchmark": "npm run build && node dist/benchmark",
-    "prepublishOnly": "npm test"
+    "clean": "node -e \"for (const d of ['dist', 'dist.esm', 'build-test']) require('fs').rmSync(d, { recursive: true, force: true })\"",
+    "build": "npm run clean && tsc -p tsconfig.json && tsc -p tsconfig.esm.json",
+    "test": "tsc -p tsconfig.test.json && node --enable-source-maps --test --import ./build-test/test-setup.js \"build-test/**/*.test.js\"",
+    "benchmark": "tsc -p tsconfig.test.json && node --enable-source-maps build-test/benchmark.js",
+    "prepare": "git config core.hooksPath .githooks || true"
   },
   "repository": {
-    "url": "git@github.com:astronautlabs/bitstream.git"
+    "type": "git",
+    "url": "git+https://github.com/unabandoned/bitstream.git"
   },
   "bugs": {
-    "url": "https://github.com/astronautlabs/bitstream/issues"
+    "url": "https://github.com/unabandoned/bitstream/issues"
   },
+  "homepage": "https://github.com/unabandoned/bitstream#readme",
   "author": "Astronaut Labs",
   "license": "MIT",
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "engines": {
+    "node": ">=22.12"
+  },
   "peerDependencies": {
-    "reflect-metadata": "^0.1.13"
+    "reflect-metadata": "^0.1.13 || ^0.2.0"
   },
   "devDependencies": {
-    "@types/chai": "^4.2.14",
-    "@types/node": "^14.0.4",
-    "@types/reflect-metadata": "^0.1.0",
-    "chai": "^4.2.0",
-    "nyc": "^15.1.0",
-    "razmin": "^0.6.20",
-    "rimraf": "^3.0.2",
-    "source-map-support": "^0.5.21",
-    "ts-node": "^10.4.0",
-    "typescript": "^5.3.3"
+    "@commitlint/cli": "21.2.3",
+    "@commitlint/config-conventional": "21.2.3",
+    "@types/node": "22.20.5",
+    "reflect-metadata": "0.2.2",
+    "typescript": "7.0.2"
   }
 }
