@@ -10,7 +10,7 @@ jobs:
     permissions:
       contents: read
       id-token: write
-    uses: unabandoned/.github/.github/workflows/reusable-publish.yml@bd9eb6bfc5a567b272e0c6f05703a726a2655531 # v1.1.0
+    uses: unabandoned/.github/.github/workflows/reusable-publish.yml@7df8c67cf681d8fc7ee0831d74c1e9d8640b12a9 # v1.3.4
     with:
       # `files` ships dist/ and dist.esm/, which tsc generates; npm publish --ignore-scripts
       # never runs prepublishOnly, so the build has to happen in the workflow.
